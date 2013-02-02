@@ -17,7 +17,16 @@
 		this.enable();
 	};
 
-	$.waiting.defaults = { tag: 'div', className: 'waiting', elements: 5, speed: 100, auto: false, radius: false };
+	$.waiting.defaults = { 
+		className: 'waiting', // class name parent gets (for your css)
+		tag: 'div',           // tag to create child elements with
+		elements: 5,          // number of child elements to generate
+		css: {},              // hash of css properties for base element
+		elementsCss: {},      // hash of css properties for each child element
+		speed: 100,           // speed to animate
+		auto: false,          // true/false to auto play on creation
+		radius: false         // if an integer will create a circle
+	};
 
 	$.waiting.setDefaults = function(options){
 		$.waiting.defaults = $.extend({}, $.waiting.defaults, options);
@@ -29,7 +38,7 @@
 					style = '',
 					s = this.settings;
 
-				this.element.addClass(s.className);
+				this.element.addClass(s.className).css(s.css);
 
 				if(this.interval)
 					this.pause();
@@ -41,7 +50,7 @@
 				}
 				
 				this.element.html(str);
-				this.children = this.element.children();
+				this.children = this.element.children().css(s.elementsCss);
 
 				this.element.trigger('enable.waiting');
 
@@ -64,7 +73,6 @@
 						if(k < 0)
 							k = l + k;
 						t.children[i].className = s.className +'-element '+ s.className +'-element-'+ i +' '+ s.className +'-play-'+ k;
-
 					}
 					t.position++;
 					if(t.position === s.elements)
