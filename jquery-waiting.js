@@ -25,6 +25,7 @@
 		elementsCss: {},      // hash of css properties for each child element
 		speed: 100,           // speed to animate
 		auto: false,          // true/false to auto play on creation
+		fluid: true,          // true/false play rolls back before completing scene
 		radius: false         // if an integer will create a circle
 	};
 
@@ -70,7 +71,7 @@
 				var animateWait = function(){
 					for(var i=0; i<l; i++){
 						var k = i-t.position;
-						if(k < 0)
+						if(s.fluid && k < 0)
 							k = l + k;
 						t.children[i].className = s.className +'-element '+ s.className +'-element-'+ i +' '+ s.className +'-play-'+ k;
 					}
