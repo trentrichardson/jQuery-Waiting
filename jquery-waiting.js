@@ -70,9 +70,10 @@
 
 				var animateWait = function(){
 					for(var i=0; i<l; i++){
-						var k = i-t.position;
+						var k = t.position - i;
 						if(s.fluid && k < 0)
 							k = l + k;
+
 						t.children[i].className = s.className +'-element '+ s.className +'-element-'+ i +' '+ s.className +'-play-'+ k;
 					}
 					t.position++;

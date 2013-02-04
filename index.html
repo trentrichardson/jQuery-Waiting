@@ -47,25 +47,37 @@
 			.clear{ clear: both; }
 
 			.waiting{ padding: 0; display: inline-block; }
-			.waiting-element{ margin: 0 2px 2px 0; background-color: #ccc; width: 10px; height: 20px; display: inline-block;}
-			.waiting-play-0{ margin-bottom: 2px; background-color: #bbb; }
+			.waiting-element{ margin: 0 2px 2px 0; background-color: #ccc; 
+				width: 10px; height: 20px; display: inline-block;}
+			.waiting-play-0{ margin-bottom: 0; background-color: #999; }
 			.waiting-play-1{ margin-bottom: 1px; background-color: #aaa; }
-			.waiting-play-2{ margin-bottom: 0; background-color: #999; }
+			.waiting-play-2{ margin-bottom: 2px; background-color: #bbb; }
 
 			.waiting-blocks{ padding: 0; display: inline-block; }
-			.waiting-blocks-element{ margin: 0 2px 0 0; background-color: #caddfb; border: solid 1px #c9ccdb;
-					width: 10px; height: 10px; display: inline-block; 
-					-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+			.waiting-blocks-element{ background-color: #caddfb; border: solid 1px #c9ccdb;
+				margin: 0 2px 0 0; width: 10px; height: 10px; display: inline-block; 
+				-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+			.waiting-blocks-play-0{ background-color: #c0d5fe; }
 			.waiting-blocks-play-1{ background-color: #caddfb; }
-			.waiting-blocks-play-2{ background-color: #c0d5fe; }
+
+			.waiting-nonfluid{ padding: 0; display: inline-block; }
+			.waiting-nonfluid-element{ margin: 0 2px 0 0; background-color: #ccc; 
+				width: 10px; height: 20px; display: inline-block;}
+			.waiting-nonfluid-play-0,
+			.waiting-nonfluid-play-1,
+			.waiting-nonfluid-play-2,
+			.waiting-nonfluid-play-3,
+			.waiting-nonfluid-play-4,
+			.waiting-nonfluid-play-5{ background-color: #999; }
 
 			.waiting-circles{ padding: 0; display: inline-block; position: relative; width: 60px; height: 60px;}
 			.waiting-circles-element{ margin: 0 2px 0 0; background-color: #e4e4e4; border: solid 1px #f4f4f4;
-					width: 10px; height: 10px; display: inline-block; 
-					-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
-			.waiting-circles-play-1{ background-color: #bEe47F; }
-			.waiting-circles-play-2{ background-color: #aEd46F; }
-			.waiting-circles-play-3{ background-color: #9EC45F; }
+				width: 10px; height: 10px; display: inline-block; 
+				-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+			.waiting-circles-play-0{ background-color: #9EC45F; }
+			.waiting-circles-play-1{ background-color: #aEd46F; }
+			.waiting-circles-play-2{ background-color: #bEe47F; }
+
 		</style>
 		
 		<script type="text/javascript">
@@ -152,21 +164,21 @@
 						<!-- ============= example -->
 						<div class="example-container">
 							<h3>Basic Initialization</h3>
-							<p>Create a waiting animation, '#waiting_1' is a simple empty div:</p>
+							<p>Create a waiting animation, '#waiting1' is a simple empty div:</p>
 							<div>
-						 		<div id="waiting_1"></div>
+						 		<div id="waiting1"></div>
 							</div>
 <pre class="ex code" data-lllanguage="js">
 /* CSS:
 .waiting{ padding: 0; display: inline-block; }
 .waiting-element{ margin: 0 2px 2px 0; background-color: #ccc; 
 	width: 10px; height: 20px; display: inline-block;}
-.waiting-play-0{ margin-bottom: 2px; background-color: #bbb; }
+.waiting-play-0{ margin-bottom: 0; background-color: #999; }
 .waiting-play-1{ margin-bottom: 1px; background-color: #aaa; }
-.waiting-play-2{ margin-bottom: 0; background-color: #999; }
+.waiting-play-2{ margin-bottom: 2px; background-color: #bbb; }
 */
 
-$('#waiting_1').waiting({ 
+$('#waiting1').waiting({ 
 	elements: 10, 
 	auto: true 
 });
@@ -187,14 +199,43 @@ $('#waiting_1').waiting({
 .waiting-blocks-element{ background-color: #caddfb; border: solid 1px #c9ccdb;
 	margin: 0 2px 0 0; width: 10px; height: 10px; display: inline-block; 
 	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+.waiting-blocks-play-0{ background-color: #c0d5fe; }
 .waiting-blocks-play-1{ background-color: #caddfb; }
-.waiting-blocks-play-2{ background-color: #c0d5fe; }
 */
 
 $('#waiting2').waiting({ 
 	className: 'waiting-blocks', 
 	elements: 3, 
 	speed: 300, 
+	auto: true 
+});
+</pre>
+						</div>
+
+						<!-- ============= example -->
+						<div class="example-container">
+							<h3>Non-Fluid</h3>
+							<p>Create a spinner that is not fluid, meaning once the lead play frame reaches the end it starts over, it does not fluidly wrap around:</p>
+							<div>
+						 		<div id="waiting3"></div>
+							</div>
+<pre class="ex code" data-lllanguage="js">
+/* CSS:
+.waiting-nonfluid{ padding: 0; display: inline-block; }
+.waiting-nonfluid-element{ margin: 0 2px 0 0; background-color: #ccc; 
+	width: 10px; height: 20px; display: inline-block;}
+.waiting-nonfluid-play-0,
+.waiting-nonfluid-play-1,
+.waiting-nonfluid-play-2,
+.waiting-nonfluid-play-3,
+.waiting-nonfluid-play-4,
+.waiting-nonfluid-play-5{ background-color: #999; }
+*/
+
+$('#waiting3').waiting({ 
+	className: 'waiting-nonfluid',
+	elements: 6, 
+	fluid: false,
 	auto: true 
 });
 </pre>
@@ -210,14 +251,15 @@ $('#waiting2').waiting({
 
 <pre class="ex code" data-lllanguage="js">
 /* CSS: notice position: relative, width, and height are set for circles
-.waiting-circles{ display: inline-block; position: relative;
-	width: 60px; height: 60px;}
+.waiting-circles{ padding: 0; display: inline-block; 
+	position: relative; width: 60px; height: 60px;}
 .waiting-circles-element{ margin: 0 2px 0 0; background-color: #e4e4e4; 
-	border: solid 1px #f4f4f4; width: 10px; height: 10px;  
+	border: solid 1px #f4f4f4;
+	width: 10px; height: 10px; display: inline-block; 
 	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
-.waiting-circles-play-1{ background-color: #bEe47F; }
-.waiting-circles-play-2{ background-color: #aEd46F; }
-.waiting-circles-play-3{ background-color: #9EC45F; }
+.waiting-circles-play-0{ background-color: #9EC45F; }
+.waiting-circles-play-1{ background-color: #aEd46F; }
+.waiting-circles-play-2{ background-color: #bEe47F; }
 */
 
 $('#waiting4').waiting({ 
@@ -234,32 +276,32 @@ $('#waiting4').waiting({
 							<h3>Using Methods and Events</h3>
 							<p>Use some methods to start, stop, disable:</p>
 							<div>
-						 		<div id="waiting3"></div>
-						 		<a href="#" id="waiting3_play">Play</a> | <a href="#" id="waiting3_pause">Pause</a> | <a href="#" id="waiting3_enable">Enable</a> | <a href="#" id="waiting3_disable">Disable</a> | <a href="#" id="waiting3_option">Option</a>
+						 		<div id="waiting5"></div>
+						 		<a href="#" id="waiting5_play">Play</a> | <a href="#" id="waiting5_pause">Pause</a> | <a href="#" id="waiting5_enable">Enable</a> | <a href="#" id="waiting5_disable">Disable</a> | <a href="#" id="waiting5_option">Option</a>
 							</div>
 
 <pre class="ex code" data-lllanguage="js">
-var $el = $('#waiting3');
+var $el = $('#waiting5');
 $el.waiting({ elements: 10 });
 
 // clicking the links to play/pause/enable/disable
-$('#waiting3_play').click(function(e){
+$('#waiting5_play').click(function(e){
 	$el.waiting('play');
 	return false;
 });
-$('#waiting3_pause').click(function(e){
+$('#waiting5_pause').click(function(e){
 	$el.waiting('pause');
 	return false;
 });
-$('#waiting3_enable').click(function(e){
+$('#waiting5_enable').click(function(e){
 	$el.waiting('enable');
 	return false;
 });
-$('#waiting3_disable').click(function(e){
+$('#waiting5_disable').click(function(e){
 	$el.waiting('disable');
 	return false;
 });
-$('#waiting3_option').click(function(e){
+$('#waiting5_option').click(function(e){
 	if($el.waiting('option','className') == 'waiting')
 		$el.waiting('option',{ className: 'waiting-blocks', elements: 5 });		
 	else $el.waiting('option',{ className: 'waiting', elements: 10 });
@@ -273,7 +315,6 @@ $el.bind('play.waiting pause.waiting enable.waiting disable.waiting', function(e
 });
 </pre>
 						</div>
-
 
 
 				<h2 id="Options">The Options</h2>
