@@ -4,6 +4,8 @@ jQuery Waiting provides a spinner which works in most all browsers, stylable wit
 
 Author: Trent Richardson [http://trentrichardson.com]
 
+Documentation: http://trentrichardson.com/examples/jQuery-Waiting/
+
 Version 0.1
 
 Copyright 2013 Trent Richardson
