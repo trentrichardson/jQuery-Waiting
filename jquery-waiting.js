@@ -24,6 +24,7 @@
 		css: {},              // hash of css properties for base element
 		elementsCss: {},      // hash of css properties for each child element
 		speed: 100,           // speed to animate
+		percent: 100,         // the limit to allow, integer 0-100 for percent
 		auto: false,          // true/false to auto play on creation
 		fluid: true,          // true/false play rolls back before completing scene
 		radius: false         // if an integer will create a circle
@@ -63,7 +64,8 @@
 		play: function(){
 				var t = this,
 					s = t.settings,
-					l = this.children.length;
+					//l = this.children.length;
+					l = Math.ceil(this.children.length * (s.percent/100));
 
 				if(this.interval)
 					this.pause();

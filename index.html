@@ -57,7 +57,7 @@
 			.waiting-blocks-element{ background-color: #caddfb; border: solid 1px #c9ccdb;
 				margin: 0 2px 0 0; width: 10px; height: 10px; display: inline-block; 
 				-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
-			.waiting-blocks-play-0{ background-color: #c0d5fe; }
+			.waiting-blocks-play-0{ background-color: #b0c5ee; }
 			.waiting-blocks-play-1{ background-color: #caddfb; }
 
 			.waiting-nonfluid{ padding: 0; display: inline-block; }
@@ -199,7 +199,7 @@ $('#waiting1').waiting({
 .waiting-blocks-element{ background-color: #caddfb; border: solid 1px #c9ccdb;
 	margin: 0 2px 0 0; width: 10px; height: 10px; display: inline-block; 
 	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
-.waiting-blocks-play-0{ background-color: #c0d5fe; }
+.waiting-blocks-play-0{ background-color: #b0c5ee; }
 .waiting-blocks-play-1{ background-color: #caddfb; }
 */
 
@@ -234,7 +234,7 @@ $('#waiting2').waiting({
 
 $('#waiting3').waiting({ 
 	className: 'waiting-nonfluid',
-	elements: 6, 
+	elements: 5, 
 	fluid: false,
 	auto: true 
 });
@@ -316,6 +316,43 @@ $el.bind('play.waiting pause.waiting enable.waiting disable.waiting', function(e
 </pre>
 						</div>
 
+						<!-- ============= example -->
+						<div class="example-container">
+							<h3>Progress bar</h3>
+							<p>Use the percent option and events to create an interactive progress bar.</p>
+							<div>
+						 		<div id="waiting6"></div>
+						 		<a href="#" id="waiting6_25">25%</a> | <a href="#" id="waiting6_50">50%</a> | <a href="#" id="waiting6_75">75%</a> | <a href="#" id="waiting6_100">100%</a>
+							</div>
+
+<pre class="ex code" data-lllanguage="js">
+var $el = $('#waiting6');
+$el.waiting({ 
+	className: 'waiting-blocks',
+	elements: 10, 
+	auto: true 
+});
+
+// clicking the links to 25, 50, 75, 100%
+$('#waiting6_25').click(function(e){
+	e.preventDefault();
+	$el.waiting('option',{ percent: 25 });	
+});
+$('#waiting6_50').click(function(e){
+	e.preventDefault();
+	$el.waiting('option',{ percent: 50 });	
+});
+$('#waiting6_75').click(function(e){
+	e.preventDefault();
+	$el.waiting('option',{ percent: 75 });	
+});
+$('#waiting6_100').click(function(e){
+	e.preventDefault();
+	$el.waiting('option',{ percent: 100 });	
+});
+</pre>
+						</div>
+
 
 				<h2 id="Options">The Options</h2>
 
@@ -346,6 +383,9 @@ fluid: true,
 
 // integer - speed to animate
 speed: 100,
+
+// the limit to allow, integer 0-100 for percent
+percent: 100,
 
 // boolean - whether to auto play
 auto: false
