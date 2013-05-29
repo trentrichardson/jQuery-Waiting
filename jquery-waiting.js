@@ -79,7 +79,7 @@
 						t.children[i].className = s.className +'-element '+ s.className +'-element-'+ i +' '+ s.className +'-play-'+ k;
 					}
 					t.position++;
-					if(t.position === s.elements)
+					if(t.position >= l)
 						t.position = 0;
 				};
 
