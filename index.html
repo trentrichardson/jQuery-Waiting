@@ -3,15 +3,11 @@
 	<head>
 		<meta charset="UTF-8" />
 
-		<title>jQuery Waiting - jQuery powered waiting spinners, progress bars, and animations</title>
+		<title>jQuery Waiting - jQuery/Zepto powered waiting spinners, progress bars, and animations</title>
 
-		<meta name="Description" content="jQuery Waiting - jQuery powered waiting spinners, progress bars, and animations, compatible with the most common browsers" />
-		<meta name="Keywords" content="jquery, javascript, waiting, gif, animation, progress, spinner" />
+		<meta name="Description" content="jQuery Waiting - jQuery/Zepto powered waiting spinners, progress bars, and animations, compatible with the most common browsers" />
+		<meta name="Keywords" content="jquery, Zepto, javascript, waiting, gif, animation, progress, spinner" />
 		
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="jquery-litelighter.js"></script>
-		<script type="text/javascript" src="jquery-waiting.js"></script>
-
 		<style type="text/css"> 
 			body,img,p,h1,h2,h3,h4,h5,h6,form,table,td,ul,ol,li,dl,dt,dd,pre,blockquote,fieldset,label{
 				margin:0;
@@ -80,31 +76,6 @@
 
 		</style>
 		
-		<script type="text/javascript">
-
-			$(document).ready(function(){
-				// quick routine for scrolling nav
-				var $nav = $('.header ul'),
-					navoffset = $nav.offset(),
-					$navclone = $nav.clone().addClass('scrollnav').appendTo('.header'),
-					$window = $(window);
-				$window.scroll(function(e){
-					if((navoffset.top+50) < $window.scrollTop()){
-						if(!$navclone.hasClass('scrolled'))
-							$navclone.addClass('scrolled');
-					}
-					else $navclone.removeClass('scrolled');
-				}).scroll();
-
-				// highlight the code
-				$('pre.code').litelighter();
-
-				// run the examples
-				$('.example-container > pre.ex').each(function(i){
-					eval($(this).data('llcode'));
-				});
-			});
-		</script>
 	</head>
 
 	<body>
@@ -129,7 +100,7 @@
 					<h3>Highly Recommended</h3>
 					<p>Subscribe to <a href="http://trentrichardson.com/category/impromptu/" title="TrentRichardson.com">my newsletter</a> and follow me <a href="http://twitter.com/practicalweb" title="Follow me on Twitter">@practicalweb</a>.</p>
 					
-					<p>It is important to let your users know what they're doing, waiting! For the developer they need support in every browser, easy customization, and efficiency.  Even though all this is possible with fancy CSS transformation, many browsers won't support it (IE < 10).  jQuery Waiting uses standard, widely accepted css to style your waiting spinner, and a little jQuery to make it function.</p>
+					<p>It is important to let your users know what they're doing, waiting! For the developer they need support in every browser, easy customization, and efficiency.  Even though all this is possible with fancy CSS transformation, many browsers won't support it (IE < 10).  jQuery Waiting uses standard, widely accepted css to style your waiting spinner, and a little jQuery to make it function.  Best of all it works with Zepto too!</p>
 					
 					<h3>Donation</h3>
 					<a href="http://carbounce.com" title="Car Bounce" style="float: right; display: inline-block;width:300px;padding: 10px;background-color: #fbfbfb;border: dotted 4px #e8e8e8;color: #9EC45F;font-size: 14px;text-decoration:none;letter-spacing:1px;"><img src="http://carbounce.com/img/logo_small.png" alt="Car Bounce" align="left" style="margin-right: 20px;"/>Try my new app to keep you informed of your car's financing status and value.</a>	
@@ -309,7 +280,7 @@ $('#waiting5_option').click(function(e){
 });
 
 // open your console to watch these events
-$el.bind('play.waiting pause.waiting enable.waiting disable.waiting', function(e){
+$el.bind('waiting:play waiting:pause waiting:enable waiting:disable', function(e){
 	if(window.console)
 		console.log(e.type);
 });
@@ -443,6 +414,38 @@ $el.bind('destroy.waiting', function(e){});
 
 			</div>
 		</div>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script> -->
+		<!-- <script type="text/javascript" src="jquery-litelighter.js"></script> -->
+		<script type="text/javascript" src="jquery-waiting.js"></script>
+
+		<script type="text/javascript">
+
+			$(document).ready(function(){
+				// quick routine for scrolling nav
+				var $nav = $('.header ul'),
+					navoffset = $nav.offset(),
+					$navclone = $nav.clone().addClass('scrollnav').appendTo('.header'),
+					$window = $(window);
+				$window.scroll(function(e){
+					if((navoffset.top+50) < $window.scrollTop()){
+						if(!$navclone.hasClass('scrolled'))
+							$navclone.addClass('scrolled');
+					}
+					else $navclone.removeClass('scrolled');
+				}).scroll();
+
+				// highlight the code
+				//$('pre.code').litelighter();
+
+				// run the examples
+				$('.example-container > pre.ex').each(function(i){
+					//eval($(this).data('llcode'));
+					eval($(this).text());
+				});
+			});
+		</script>
 
 		<script type="text/javascript"> /*
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

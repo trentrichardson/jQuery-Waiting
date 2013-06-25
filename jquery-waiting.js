@@ -54,7 +54,7 @@
 				this.element.html(str);
 				this.children = this.element.children().css(s.elementsCss);
 
-				this.element.trigger('enable.waiting');
+				this.element.trigger('waiting:enable');
 
 				if(s.auto)
 					this.play();
@@ -92,7 +92,7 @@
 					}
 				})();
 
-				this.element.trigger('play.waiting');
+				this.element.trigger('waiting:play');
 
 				return this.element;
 			},
@@ -103,7 +103,7 @@
 				this.interval = null;
 			}
 			
-			this.element.trigger('pause.waiting');
+			this.element.trigger('waiting:pause');
 
 			return this.element;
 		},
@@ -119,12 +119,12 @@
 
 				this.position = 0;
 				
-				this.element.trigger('disable.waiting');
+				this.element.trigger('waiting:disable');
 
 				return this.element;
 			},
 		destroy: function(){
-				this.element.trigger('destroy.waiting');
+				this.element.trigger('waiting:destroy');
 				return this.disable().unbind('.waiting').removeData('waiting').removeClass(this.settings.className).empty();
 			},
 		option: function(key, val){
@@ -141,30 +141,33 @@
 				return this.settings[key];
 			}
 	});
+	
+	$.waiting.lookup = {
+		i: 0
+	};
 
-	$.fn.extend({
-		waiting: function(o) {
-			o = o || {};
-			var tmp_args = Array.prototype.slice.call(arguments);
+	$.fn.waiting = function(o) {
+		o = o || {};
+		var tmp_args = Array.prototype.slice.call(arguments);
 
-			if (typeof(o) == 'string'){ 
-				if(o == 'option' && typeof(tmp_args[1]) == 'string' && tmp_args.length === 2){
-					var inst = $(this).data('waiting');
-					return inst[o].apply(inst, tmp_args.slice(1));
-				}
-				else return this.each(function() {
-					var inst = $(this).data('waiting');
-					inst[o].apply(inst, tmp_args.slice(1));
-				});
-			} else return this.each(function() {
-					var $t = $(this);
-					$t.data('waiting', new $.waiting($t, o) );
-				});
-		}
-	});
+		if (typeof(o) == 'string'){ 
+			if(o == 'option' && typeof(tmp_args[1]) == 'string' && tmp_args.length === 2){
+				var inst = $.waiting.lookup[$(this).data('waiting')];
+				return inst[o].apply(inst, tmp_args.slice(1));
+			}
+			else return this.each(function() {
+				var inst = $.waiting.lookup[$(this).data('waiting')];
+				inst[o].apply(inst, tmp_args.slice(1));
+			});
+		} else return this.each(function() {
+				var $t = $(this);
+				$.waiting.lookup[++$.waiting.lookup.i] = new $.waiting($t, o);
+				$t.data('waiting', $.waiting.lookup.i);
+			});
+	};
 
 	
-})(jQuery);
+})(window.jQuery || window.Zepto || window.$);
 
 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
