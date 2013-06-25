@@ -1,12 +1,12 @@
 jQuery Waiting
 ==============
-jQuery Waiting provides a spinner which works in most all browsers, stylable with css.
+jQuery Waiting provides a spinner which works in most all browsers, stylable with css, and compatible with jQuery and Zepto.
 
 Author: Trent Richardson [http://trentrichardson.com]
 
 Documentation: http://trentrichardson.com/examples/jQuery-Waiting/
 
-Version 0.1
+Version 0.3
 
 Copyright 2013 Trent Richardson
 
