@@ -54,21 +54,24 @@
 			}
 	});
 
-	$.fn.extend({
-		litelighter: function(o) {
-			o = o || {};
-			var tmp_args = Array.prototype.slice.call(arguments);
+	$.litelighter.lookup = {
+		i: 0
+	};
 
-			if (typeof(o) == 'string') return this.each(function() {
-					var inst = $(this).data('litelighter');
-					inst[o].apply(inst, tmp_args.slice(1));
-				});
-			else return this.each(function() {
-					var $t = $(this);
-					$t.data('litelighter', new $.litelighter($t, o) );
-				});
-		}
-	});
+	$.fn.litelighter = function(o) {
+		o = o || {};
+		var tmp_args = Array.prototype.slice.call(arguments);
+
+		if (typeof(o) == 'string') return this.each(function() {
+				var inst = $.litelighter.lookup[$(this).data('litelighter')];
+				inst[o].apply(inst, tmp_args.slice(1));
+			});
+		else return this.each(function() {
+				var $t = $(this);
+				$.litelighter.lookup[++$.litelighter.lookup.i] = new $.litelighter($t, o);
+				$t.data('litelighter', $.litelighter.lookup.i );
+			});
+	};
 
 	$.litelighter.highlight = function(txt, style, lang){
 		// recursively do any sub templating...
@@ -167,4 +170,4 @@
 			script: { re: /(?:\&lt;script.*?\&gt;)([\s\S]+?)(?:\&lt;\/script\&gt;)/gi, language: 'js'}
 		};
 	
-})(jQuery);
+})(window.jQuery || window.Zepto || window.$);
